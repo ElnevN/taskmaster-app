@@ -1,0 +1,213 @@
+/* client/src/App.css */
+:root {
+  --paradise-pink: #EF476F;
+  --sunglow-yellow: #FFD166;
+  --caribbean-green: #06D6A0;
+  --blue-ncs: #118AB2;
+  --midnight-green: #073B4C;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e9ecef;
+  --dark-gray: #6c757d;
+}
+body {
+  margin: 0; font-family: system-ui, sans-serif; background-color: var(--background-color); color: var(--midnight-green);
+  transition: background-color 0.5s ease;
+}
+.App {
+  min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 2rem; box-sizing: border-box;
+}
+.app-title { font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem; line-height: 1.2; }
+.subtitle { font-size: 1.2rem; color: var(--dark-gray); margin-top: 0; margin-bottom: 2rem; }
+
+.action-box {
+  width: 100%; max-width: 450px; background: white; padding: 2rem 2.5rem;
+  border-radius: 12px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); text-align: center;
+}
+.action-box.wide {
+  max-width: 800px;
+}
+.button {
+  width: 100%; padding: 1rem; margin-bottom: 1rem; border: none; border-radius: 8px;
+  font-size: 1.2rem; font-weight: bold; cursor: pointer; transition: all 0.2s ease;
+  color: var(--white);
+}
+.button:hover { transform: translateY(-3px); filter: brightness(1.1); }
+.button-primary { background-color: var(--paradise-pink); }
+.button-secondary { background-color: var(--blue-ncs); margin-top: 1rem; }
+
+.input-field {
+  width: 100%; box-sizing: border-box; padding: 0.8rem; margin-bottom: 1rem;
+  font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; text-align: center;
+}
+.input-field::placeholder { color: #aaa; }
+
+.button-link {
+  background: none; border: none; color: var(--blue-ncs); cursor: pointer;
+  padding: 0.5rem; font-size: 0.9rem; text-decoration: underline;
+}
+
+.game-code-box { background-color: #fff; border: 2px solid var(--caribbean-green); padding: 1.5rem; margin: 1rem auto; border-radius: 8px; max-width: 300px; }
+.game-code-box h2 { font-size: 3rem; margin: 0; letter-spacing: 0.5rem; color: var(--midnight-green); text-transform: uppercase; }
+
+.player-list { list-style: none; padding: 0; max-width: 300px; margin: 1rem auto; text-align: left; }
+.player-list li { background: #f0f0f0; padding: 0.8rem; border-radius: 4px; margin-bottom: 0.5rem; font-weight: 500; display: flex; align-items: center; font-size: 1.1rem; }
+.player-icon { font-size: 1.5rem; margin-right: 0.75rem; width: 25px; text-align: center; }
+.nominate-button { background: none; border: none; cursor: pointer; margin-left: auto; padding: 0.25rem 0.5rem; font-size: 1.5rem; opacity: 0.25; transition: all 0.2s ease; }
+.nominate-button:hover:not(:disabled) { opacity: 1; transform: scale(1.2); }
+.nominate-button.nominated { opacity: 1; }
+.nominate-button:disabled:not(.nominated) { cursor: not-allowed; opacity: 0.1; }
+
+.instructions { font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; white-space: pre-wrap; }
+.button-placeholder { background-color: var(--medium-gray); color: var(--dark-gray); padding: 1rem; border-radius: 8px; font-weight: bold; }
+.timer-display { font-size: 6rem; font-weight: bold; color: var(--blue-ncs); padding: 2rem 0; }
+.taskmaster-prompt { font-size: 0.9rem; font-style: italic; color: var(--dark-gray); background-color: var(--light-gray); padding: 0.75rem; border-radius: 4px; margin-top: 1.5rem; margin-bottom: 0; }
+
+.live-voting { padding: 1rem 0; display: flex; justify-content: center; gap: 1rem; }
+.live-voting .emoji-button { background: none; border: 2px solid #ddd; font-size: 2.5rem; padding: 0.5rem; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; line-height: 1; }
+.live-voting .emoji-button:hover { transform: scale(1.2); border-color: var(--blue-ncs); }
+.live-voting .emoji-button.selected { background-color: var(--sunglow-yellow); border-color: var(--midnight-green); }
+.live-voting .emoji-button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.results-list { list-style: none; padding: 0; margin: 2rem 0; }
+.results-list li { display: flex; align-items: center; padding: 1rem; background: var(--light-gray); border-radius: 8px; margin-bottom: 0.5rem; font-size: 1.2rem; }
+.results-list .rank { font-weight: bold; font-size: 1.5rem; color: var(--blue-ncs); width: 40px; }
+.results-list .player-name { font-weight: 500; flex-grow: 1; text-align: left; }
+.results-list .score { font-weight: bold; }
+
+.emoji-submission-area { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.emoji-display { flex-grow: 1; background-color: var(--light-gray); border: 2px solid #ccc; border-radius: 8px; padding: 0.75rem; min-height: 40px; font-size: 1.5rem; text-align: left; overflow-wrap: break-word; }
+.emoji-picker-container { margin-bottom: 1rem; }
+.emoji-submission-display { font-size: 2.5rem; background: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin: 1rem 0; min-height: 80px; display: flex; align-items: center; justify-content: center; overflow-wrap: break-word; line-height: 1.4; }
+
+.submission-confirmation { background-color: var(--medium-gray); color: var(--dark-gray); padding: 1rem; border-radius: 8px; font-weight: bold; width: 100%; box-sizing: border-box; margin-bottom: 1rem; }
+
+.taskmaster-header {
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7); color: white;
+  padding: 0.5rem 1rem; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+  font-size: 1rem; z-index: 100; display: flex; align-items: center; gap: 1rem;
+}
+.settings-icon {
+  background: none; border: none; color: white;
+  font-size: 1.5rem; cursor: pointer; padding: 0; line-height: 1;
+}
+.settings-icon:hover { filter: brightness(1.5); }
+
+.wrong-answers-form { text-align: left; margin: 2rem 0; }
+.question-group { margin-bottom: 1.5rem; }
+.question-group label { display: block; font-weight: bold; margin-bottom: 0.5rem; }
+.question-group .input-field { text-align: left; padding: 0.8rem 1rem; }
+
+.wrong-answers-display {
+  text-align: left;
+  margin: 1.5rem 0;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+}
+.qa-pair {
+  margin-bottom: 1rem;
+}
+.qa-pair:last-child {
+  margin-bottom: 0;
+}
+.qa-pair .question {
+  font-weight: bold;
+  color: var(--dark-gray);
+  margin: 0 0 0.25rem 0;
+}
+.qa-pair .answer {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--sunglow-yellow);
+}
+
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white; padding: 2rem; border-radius: 12px;
+  width: 90%; max-width: 400px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.modal-content h2 { margin-top: 0; }
+.modal-content .player-list { max-width: none; }
+.modal-content .player-list li { cursor: pointer; transition: background-color 0.2s; }
+.modal-content .player-list li:hover { background-color: var(--medium-gray); }
+
+.attribution-link { position: fixed; bottom: 10px; right: 10px; z-index: 50; }
+
+/* --- Styles for Lobby & Game 4 --- */
+.taskmaster-controls {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: var(--light-gray);
+  border-radius: 8px;
+}
+.celebration-type-selector {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.table-container {
+  width: 100%;
+  margin: 2rem 0;
+}
+.voting-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.voting-table th, .voting-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--medium-gray);
+  vertical-align: middle;
+}
+.voting-table th {
+  font-size: 1.1rem;
+  color: var(--dark-gray);
+}
+.voting-table tr.correct {
+  background-color: #fffbe6;
+}
+.voting-table tr.correct .guess-text-cell {
+  font-weight: bold;
+}
+.guess-text-cell {
+  font-size: 1.2rem;
+  width: 50%;
+}
+.votes-received-cell {
+  font-size: 1.5rem;
+  width: 20%;
+  text-align: center;
+}
+.vote-cell {
+  text-align: right;
+  width: 30%;
+  white-space: nowrap;
+  position: relative;
+}
+.vote-cell .emoji-button.small {
+  font-size: 1.5rem;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+}
+.vote-cell .correct-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 1.5rem;
+  opacity: 0.3;
+  transition: all 0.2s ease;
+}
+.voting-table tr.correct .correct-button {
+  opacity: 1;
+}
