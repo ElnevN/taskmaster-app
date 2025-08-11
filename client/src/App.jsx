@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 import EmojiPicker from 'emoji-picker-react';
 import './App.css';
 
-const socket = io('http://localhost:3001');
+const socket = io(import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001');
 
 const endSounds = ['/horn.mp3', '/endjingle.mp3', '/passionend.mp3', '/cute.mp3'];
 const VOTE_EMOJIS = ['⭐', '❤️', '😂'];
