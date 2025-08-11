@@ -23,12 +23,18 @@ function shuffleArray(array) {
 
 // --- Components ---
 
-const TaskmasterHeader = ({ gameCode, onSettingsClick }) => {
+const TaskmasterHeader = ({ gameCode, onSettingsClick, onEndGameClick }) => {
   if (!gameCode) return null;
   return (
     <div className="taskmaster-header">
       <span>Game Code: <strong>{gameCode}</strong></span>
-      <button className="settings-icon" onClick={onSettingsClick} title="Game Settings">⚙️</button>
+      <div className="header-buttons">
+        {/* We only show the end game button if the function is provided */}
+        {onEndGameClick && (
+           <button className="settings-icon end-game-button" onClick={onEndGameClick} title="End Game & Show Leaderboard">🏆</button>
+        )}
+        <button className="settings-icon" onClick={onSettingsClick} title="Game Settings">⚙️</button>
+      </div>
     </div>
   );
 };
@@ -273,6 +279,13 @@ function App() {
   // --- Event Handlers ---
   const handleCreateGame = () => { if (!name) { alert('Please enter your name'); return; } socket.emit('create-game', name); };
   const handleJoinGame = () => { if (!name || !joinCode) { alert('Please enter your name and a game code'); return; } socket.emit('join-game', { gameCode: joinCode.toUpperCase(), playerName: name }); };
+  // NEW: Handler for the end game button
+const handleEndGameEarly = () => {
+  if (window.confirm('Are you sure you want to end the current game and go to the final leaderboard?')) {
+    socket.emit('end-game-early', gameCode);
+  }
+};
+  
   const handleNominate = (playerId) => { socket.emit('nominate-goh', { gameCode, playerId }); };
   const handleTransferTaskmaster = (newMasterId) => { socket.emit('transfer-taskmaster', { gameCode, newMasterId }); setShowSettingsModal(false); };
   const handleSetCelebrationType = (e) => { socket.emit('set-celebration-type', { gameCode, type: e.target.value }); };
@@ -740,7 +753,11 @@ function App() {
 
   return (
     <div className="App">
-      {isTaskmaster && <TaskmasterHeader gameCode={gameCode} onSettingsClick={() => setShowSettingsModal(true)} />}
+      {isTaskmaster && <TaskmasterHeader 
+  gameCode={gameCode} 
+  onSettingsClick={() => setShowSettingsModal(true)}
+  onEndGameClick={isTaskmaster && view.startsWith('game') ? handleEndGameEarly : null} 
+/>}
       <TransferTaskmasterModal 
         show={showSettingsModal} 
         onClose={() => setShowSettingsModal(false)}

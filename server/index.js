@@ -680,8 +680,21 @@ io.on('connection', (socket) => {
   });
 
 
-  // --- Disconnect ---
-  socket.on('disconnect', () => {
+// --- NEW: Handler to end a game early ---
+socket.on('end-game-early', (gameCode) => {
+  const session = sessions[gameCode];
+  // Only the taskmaster can end the game
+  if (session && session.taskmasterId === socket.id) {
+    // Sort the players by their current score
+    const finalResults = [...session.players].sort((a, b) => b.score - a.score);
+    // Reuse the existing event to show the final leaderboard
+    io.to(gameCode).emit('show-final-results', { results: finalResults });
+  }
+});
+
+
+// --- Disconnect ---
+socket.on('disconnect', () => {
     console.log(`User disconnected: ${socket.id}`);
   });
 });
